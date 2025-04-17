@@ -1,0 +1,56 @@
+---
+title: 'Coding Assignment #6'
+author: "leah corcoran"
+date: "2025-03-31"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(dplyr)
+library(ggrepel)
+```
+
+#Q1 
+mtcars
+
+```{r}
+car_names<- rownames(mtcars)
+ggplot(mtcars,aes(hp,mpg,color=factor(cyl)))+geom_point()+geom_text_repel(aes(label=car_names),size=2)+labs(title="mpg vs hp", x="hp", y="mpg", color="cyl")+theme(plot.title = element_text(face="bold", size=16, hjust=.5), axis.title = element_text(face="bold"), panel.background = element_rect(fill="gray90", color=NA))
+```
+```{r}
+ggplot(diamonds)+geom_bar(mapping=aes(cut, fill=color))+theme(axis.text.x = element_text(angle=45, hjust=1), legend.text = element_text(size=12), legend.position = "bottom")
+                                                                                         
+```
+#Q3
+```{r}
+ggplot(iris, aes(Species, Sepal.Length, fill=Species))+geom_boxplot(width=0.1)+theme(axis.title.x = element_text(size = 14), panel.background = element_rect(fill="white"), panel.border = element_rect(color="black", fill=NA, size=1))
+```
+#Q4
+```{r}
+ggplot(mtcars, aes(wt, mpg, color=factor(cyl)))+geom_point()+facet_wrap(~cyl)+theme(text = element_text(size=14), strip.text = element_text(color="darkgreen"), legend.position = "bottom")+labs(color="cyl")
+```
+#Q5
+```{r}
+ggplot(mtcars, aes(wt, mpg, color=disp, size = hp))+geom_point()+scale_size_continuous(range=c(2,8))+scale_color_gradient(low="lightpink", high="lightblue")+labs(title="mpg vs wt")+theme(plot.title = element_text(face="bold", hjust=.5), legend.position = "bottom")
+```
+#Q6
+```{r}
+ggplot(mtcars, aes(wt, mpg, color=factor(cyl)))+geom_point()+scale_y_log10()+labs(title = "Logarithmic Scale for MPG vs Weight",y= "mpg(log scale)", color="cyl")+theme(plot.title = element_text(face="bold", hjust=.5))
+```
+#Q7
+```{r}
+ggplot(mtcars, aes(wt, mpg, alpha = mpg))+geom_point(color="blue")+scale_alpha(range= c(0.1, 1))+annotate("rect", xmin= 1, xmax=2, ymin=25, ymax=35, fill="blue", alpha=.1)+annotate("text", x=1.75, y=30,label="low wt high mpg", size=4) +theme(legend.position = "bottom", plot.title =element_text(face="bold", hjust=.5))+labs(title="MPG vs Weight (Transparency by MPG)")
+```
+#Q8
+```{r}
+group_by(mtcars, cyl) %>% summarise(mean_mpg=mean(mpg)) %>% ggplot(aes(factor(cyl), mean_mpg))+geom_col(fill="steelblue")+labs(title="Average MPG by Cylinder Count", x="cyl")+theme(plot.title = element_text(face="bold", hjust=.5))
+```
+#Q9
+```{r}
+group_by(diamonds, cut) %>% summarise(mean_price=mean(price)) %>% ggplot(aes(x=reorder(cut, mean_price), mean_price, fill=cut))+geom_col()+scale_fill_brewer(palette = "Set2")+labs(title="Average Diamond Price by Cut Quality", y="Average Price", x="cut")+theme(plot.title = element_text(face="bold", hjust=.5))
+```
+#Q10
+```{r}
+iris %>% filter(Species==c("setosa", "versicolor"))%>% ggplot(aes(Sepal.Length, Petal.Length, color=Species))+geom_point()+geom_smooth(method = "lm", se=FALSE)+labs(title="Sepal Length and Petal Length (Setosa & Versicolor)", x="Sepal Length (cm)", y= "Petal Length (cm)")+theme(plot.title = element_text(family = "mono", face="bold", hjust=.5), axis.title = element_text(family="mono"), legend.position = "bottom")
+```
+
