@@ -1,6 +1,6 @@
 # HERE IS THE DESCRIPTION OF THIS PROJECT: 
 
-Its a new project! I have something I need to get off my chest. I am [Bucky Badger] (https://en.wikipedia.org/wiki/Bucky_Badger)
+Its a new project! I have something I need to get off my chest. I am [Bucky Badger](https://en.wikipedia.org/wiki/Bucky_Badger)
 
 I know I am because I like to: 
 1. do headstands
